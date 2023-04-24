@@ -49,7 +49,7 @@ class Like {
     try {
       const requestAsJSON = JSON.parse(request);
       connection.query(
-        `DELETE * FROM Likes WHERE email=${requestAsJSON.email}`,
+        `DELETE * FROM Likes WHERE id=${requestAsJSON.id}`,
         (error, results) => {}
       );
     } catch (error) {
