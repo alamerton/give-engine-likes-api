@@ -4,8 +4,7 @@ import Like from "../models/Like";
 
 const router = Router();
 
-router.get("/", LikeController.getAll);
-router.post("/add", LikeController.create);
-router.post("/remove", LikeController.create);
+router.post("/add", LikeController.add);
+router.post("/remove", LikeController.remove);
 
 export default router;
