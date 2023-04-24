@@ -1,6 +1,5 @@
 import { Router } from "express";
 import LikeController from "../controllers/Like.controller";
-import Like from "../models/Like";
 
 const router = Router();
 

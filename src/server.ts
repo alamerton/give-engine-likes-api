@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from 'express';
 import cors from "cors";
 import bodyParser from "body-parser";
-// import userRoutes from "./routes/User.route";
+import likeRoutes from "./routes/Like.route";
 
 const app = express();
 app.use(cors());
