@@ -7,5 +7,5 @@ const express_1 = require("express");
 const Like_controller_1 = __importDefault(require("../controllers/Like.controller"));
 const router = (0, express_1.Router)();
 router.post("/create", Like_controller_1.default.add);
-router.post("/remove", Like_controller_1.default.remove);
+router.delete("/remove", Like_controller_1.default.remove);
 exports.default = router;

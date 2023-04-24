@@ -51,16 +51,19 @@ class Like {
   }
 
   static remove(request: any, callback: (error: Error | null) => void) {
-    try {
-      const requestAsJSON = JSON.parse(request);
-      connection.query(
-        `DELETE * FROM Likes WHERE id=${requestAsJSON.id}`,
-        (error, results) => {}
-      );
-    } catch (error) {
-      console.log("Error: ", error);
-      callback(error as Error);
-    }
+    const requestAsJSON = JSON.parse(request);
+    const userId: string = requestAsJSON.userId;
+    const charityId: string = requestAsJSON.charityId;
+    connection.query(
+      `DELETE FROM likes WHERE userId = '${userId}' AND charityId = '${charityId}'`,
+      (error) => {
+        if (error) {
+          callback(error);
+        } else {
+          callback(null);
+        }
+      }
+    );
   }
 }
 

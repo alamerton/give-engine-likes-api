@@ -39,14 +39,17 @@ class Like {
         });
     }
     static remove(request, callback) {
-        try {
-            const requestAsJSON = JSON.parse(request);
-            dbconfig_1.default.query(`DELETE * FROM Likes WHERE id=${requestAsJSON.id}`, (error, results) => { });
-        }
-        catch (error) {
-            console.log("Error: ", error);
-            callback(error);
-        }
+        const requestAsJSON = JSON.parse(request);
+        const userId = requestAsJSON.userId;
+        const charityId = requestAsJSON.charityId;
+        dbconfig_1.default.query(`DELETE FROM likes WHERE userId = '${userId}' AND charityId = '${charityId}'`, (error) => {
+            if (error) {
+                callback(error);
+            }
+            else {
+                callback(null);
+            }
+        });
     }
 }
 exports.default = Like;
