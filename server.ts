@@ -6,10 +6,8 @@ import bodyParser from "body-parser";
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-// app.use("/users", userRoutes);
-app.get('/', (req: Request, res: Response) => {
-    res.send('Express + TypeScript Server');
-  });
+app.use("/likes", likeRoutes);
+
 const port = 5002;
 
 app.listen(port, () => {
