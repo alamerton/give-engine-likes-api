@@ -3,7 +3,7 @@ import LikeController from "../controllers/Like.controller";
 
 const router = Router();
 
-router.post("/create", LikeController.add);
-router.delete("/remove", LikeController.remove);
+router.post("/", LikeController.add);
+router.delete("/", LikeController.remove);
 
 export default router;
