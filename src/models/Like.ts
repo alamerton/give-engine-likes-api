@@ -29,6 +29,30 @@ class Like {
     return date;
   }
 
+  // get significant like by ordering likes by most relevant/most liked and discarding all but that one
+  static getLikeByUserId(
+    request: any,
+    callback: (error: Error | null, like: string | null) => void
+  ) {
+    const requestAsJSON = JSON.parse(request);
+    connection.query(
+      `SELECT * FROM users WHERE email='${requestAsJSON.userId}'`,
+      (error, results) => {
+        if (error) {
+          callback(error, null);
+        } else {
+          const like: Like = {
+            id: results[0].id,
+            userId: results[0].userId,
+            charityId: results[0].charityId,
+            dateLiked: results[0].charityId,
+          };
+          callback(null, like.charityId);
+        }
+      }
+    );
+  }
+
   static create(request: any, callback: (error: Error | null) => void) {
     const requestAsJSON = JSON.parse(request);
     const likeID: string = uuid();
