@@ -36,7 +36,7 @@ class Like {
   ) {
     const requestAsJSON = JSON.parse(request);
     connection.query(
-      `SELECT * FROM users WHERE email='${requestAsJSON.userId}'`,
+      `SELECT * FROM likes WHERE userId='${requestAsJSON.userId}'`,
       (error, results) => {
         if (error) {
           callback(error, null);
