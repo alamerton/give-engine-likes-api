@@ -41,6 +41,7 @@ class Like {
         if (error) {
           callback(error, null);
         } else {
+          // TODO: results is a list of likes. How do I choose the most relevant? I can just choose the first in the list for now.
           const like: Like = {
             id: results[0].id,
             userId: results[0].userId,
