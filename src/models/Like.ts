@@ -29,15 +29,11 @@ class Like {
     return date;
   }
 
-  // TODO: get significant like by ordering likes by most relevant/most liked and discarding all but that one
   static getLikeByUserId(
     request: any,
-    callback: (error: Error | null, like: Like | null) => void // TODO: might need to change type of like when i pull back a like instead of a charity id
+    callback: (error: Error | null, like: Like | null) => void
   ) {
-    const requestAsJSON = JSON.parse(request); // gets user id ok
-    console.log(requestAsJSON);
-    console.log(requestAsJSON.userId);
-
+    const requestAsJSON = JSON.parse(request);
     connection.query(
       `SELECT * FROM likes WHERE userId='${requestAsJSON.userId}'`,
       (error, results) => {
@@ -47,7 +43,7 @@ class Like {
           const noLikesError = new Error("No likes for user");
           callback(noLikesError, null);
         } else {
-          // TODO: results is a list of likes. How do I choose the most relevant? I can just choose the first in the list for now.
+          // This method just selects the first like in the list for now
           const like: Like = {
             id: results[0]?.id,
             userId: results[0]?.userId,

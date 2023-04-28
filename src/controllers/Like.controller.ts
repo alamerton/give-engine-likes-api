@@ -8,7 +8,7 @@ class LikeController {
       if (error && error?.message === "No likes for user") {
         res.status(400).json({ error });
       } else if (error) {
-        res.status(500).json({ error }); // it gets funny about this
+        res.status(500).json({ error });
       } else {
         res.status(201).json({ like });
       }
@@ -18,7 +18,7 @@ class LikeController {
     const request = JSON.stringify(req.body);
     Like.create(request, (error) => {
       if (error) {
-        res.status(500).json({ error }); // it gets funny about this
+        res.status(500).json({ error });
       } else {
         res.sendStatus(201);
       }
