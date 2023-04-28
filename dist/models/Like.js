@@ -20,6 +20,33 @@ class Like {
         const date = day + "-" + month + "-" + year;
         return date;
     }
+    // TODO: get significant like by ordering likes by most relevant/most liked and discarding all but that one
+    static getLikeByUserId(request, callback // TODO: might need to change type of like when i pull back a like instead of a charity id
+    ) {
+        const requestAsJSON = JSON.parse(request); // gets user id ok
+        console.log(requestAsJSON);
+        console.log(requestAsJSON.userId);
+        dbconfig_1.default.query(`SELECT * FROM likes WHERE userId='${requestAsJSON.userId}'`, (error, results) => {
+            var _a, _b, _c, _d;
+            if (error) {
+                callback(error, null);
+            }
+            else if (!results[0]) {
+                const noLikesError = new Error("No likes for user");
+                callback(noLikesError, null);
+            }
+            else {
+                // TODO: results is a list of likes. How do I choose the most relevant? I can just choose the first in the list for now.
+                const like = {
+                    id: (_a = results[0]) === null || _a === void 0 ? void 0 : _a.id,
+                    userId: (_b = results[0]) === null || _b === void 0 ? void 0 : _b.userId,
+                    charityId: (_c = results[0]) === null || _c === void 0 ? void 0 : _c.charityId,
+                    dateLiked: (_d = results[0]) === null || _d === void 0 ? void 0 : _d.dateLiked,
+                };
+                callback(null, like);
+            }
+        });
+    }
     static create(request, callback) {
         const requestAsJSON = JSON.parse(request);
         const likeID = (0, uuid_1.v4)();

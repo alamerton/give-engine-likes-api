@@ -5,10 +5,12 @@ class LikeController {
   static async getLikeByUserId(req: Request, res: Response) {
     const request = JSON.stringify(req.body);
     Like.getLikeByUserId(request, (error, like) => {
-      if (error) {
+      if (error && error?.message === "No likes for user") {
+        res.status(400).json({ error });
+      } else if (error) {
         res.status(500).json({ error }); // it gets funny about this
       } else {
-        res.sendStatus(201);
+        res.status(201).json({ like });
       }
     });
   }

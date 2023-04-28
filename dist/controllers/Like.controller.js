@@ -14,6 +14,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Like_1 = __importDefault(require("../models/Like"));
 class LikeController {
+    static getLikeByUserId(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const request = JSON.stringify(req.body);
+            Like_1.default.getLikeByUserId(request, (error, like) => {
+                if (error && (error === null || error === void 0 ? void 0 : error.message) === "No likes for user") {
+                    res.status(400).json({ error });
+                }
+                else if (error) {
+                    res.status(500).json({ error }); // it gets funny about this
+                }
+                else {
+                    res.status(201).json({ like });
+                }
+            });
+        });
+    }
     static add(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const request = JSON.stringify(req.body);
