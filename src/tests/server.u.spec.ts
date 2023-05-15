@@ -1,8 +1,5 @@
 import request from "supertest";
-import Like from "../models/Like";
 import server from "../server";
-import { response } from "express";
-import connection from "../dbconfig";
 
 describe("Test Likes API Express Server", () => {
   test("the '/' endpoint with a POST request to add a new like", async () => {
