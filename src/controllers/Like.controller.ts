@@ -6,7 +6,7 @@ class LikeController {
     const request = JSON.stringify(req.body);
     Like.getLikeByUserId(request, (error, like) => {
       if (error && error?.message === "No likes for user") {
-        res.status(400).json({ error });
+        res.status(404).json({ error });
       } else if (error) {
         res.status(500).json({ error });
       } else {
